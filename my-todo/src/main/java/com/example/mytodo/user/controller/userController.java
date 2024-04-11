@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.mytodo.user.dto.UserDto;
 import com.example.mytodo.user.entities.User;
 import com.example.mytodo.user.repository.UserRepository;
 
@@ -47,15 +48,15 @@ public class userController {
 
     // JSON형태의 요청 본문을 사용하기 위해 @RequestBody를 사용하자
     @PostMapping("/signup")
-    public ResponseEntity<?> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {// @RequestBody는 하나만 쓰자
 
-        User findUser = userRepository.findByUsername(user.getUsername());
+        User findUser = userRepository.findByUsername(userDto.getUsername());
 
         if (findUser != null) {
-            logger.info("중복된 이름: " + user.getUsername());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: " + user.getUsername() + "은 중복된 이름입니다");
+            logger.info("중복된 이름: " + userDto.getUsername());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: " + userDto.getUsername() + "은 중복된 이름입니다");
         }
-        User newUser = new User(user.getUsername(), user.getPassword(), "USER,ADMIN");
+        User newUser = new User(userDto.getUsername(), userDto.getPassword(), "USER,ADMIN");
         // rolse를 USER로 하드코딩
         User saveUser = userRepository.save(newUser);
         return ResponseEntity.ok(saveUser);

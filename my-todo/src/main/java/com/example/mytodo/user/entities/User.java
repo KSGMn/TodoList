@@ -2,6 +2,8 @@ package com.example.mytodo.user.entities;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
+    @JsonIgnore // Json객체로 값을 전달할때 password를 숨기기 위하여 DTO를 만들어 사용하고 Ignore를 추가
     private String password;
     private String roles;
 

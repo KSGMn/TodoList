@@ -62,7 +62,7 @@ public class todoJpaController {
         return ResponseEntity.ok(updateTodo);
     }
 
-    @Secured("ROLE_ADMIN")
+    @Secured("SCOPE_ADMIN") // 권한을 가진 사람만 사용 가능
     @GetMapping("/{username}/admin")
     public String adminPage(@PathVariable String username) {
         return "관리자 페이지";
