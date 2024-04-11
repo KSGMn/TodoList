@@ -1,4 +1,4 @@
-package com.example.mytodo.controller;
+package com.example.mytodo.todo.controller;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.mytodo.entities.Todo;
-import com.example.mytodo.service.todoService;
+import com.example.mytodo.todo.entities.Todo;
+import com.example.mytodo.todo.service.todoService;
 
 import jakarta.validation.Valid;
 
@@ -55,4 +55,5 @@ public class todoController {
         Todo updateTodo = todoservice.updateTodo(todo);
         return ResponseEntity.ok(updateTodo);
     }
+
 }

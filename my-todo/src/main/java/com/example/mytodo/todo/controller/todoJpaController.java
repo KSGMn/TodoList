@@ -1,9 +1,10 @@
-package com.example.mytodo.controller;
+package com.example.mytodo.todo.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,14 +13,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.mytodo.entities.Todo;
-import com.example.mytodo.repository.TodoRepository;
+import com.example.mytodo.todo.entities.Todo;
+import com.example.mytodo.todo.repository.TodoRepository;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor // Repository와 Service에 대한 생성자 주입
+
 public class todoJpaController {
 
     private TodoRepository todorepository;
@@ -58,5 +60,11 @@ public class todoJpaController {
             @RequestBody Todo todo) {
         Todo updateTodo = todorepository.save(todo);
         return ResponseEntity.ok(updateTodo);
+    }
+
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/{username}/admin")
+    public String adminPage(@PathVariable String username) {
+        return "관리자 페이지";
     }
 }

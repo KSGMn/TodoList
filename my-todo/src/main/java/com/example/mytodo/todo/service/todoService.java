@@ -1,4 +1,4 @@
-package com.example.mytodo.service;
+package com.example.mytodo.todo.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
-import com.example.mytodo.entities.Todo;
+import com.example.mytodo.todo.entities.Todo;
 
 import jakarta.validation.Valid;
 
