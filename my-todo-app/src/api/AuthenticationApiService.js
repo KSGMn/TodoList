@@ -5,3 +5,10 @@ export const JwtAuthenticationService = (username, password) =>
     username: username,
     password: password,
   });
+
+export const JwtRefreshTokenService = (refreshToken) =>
+  api.post("/token/refresh", {
+    refreshToken: refreshToken,
+  });
+
+export const Logout = () => api.post("/logout");

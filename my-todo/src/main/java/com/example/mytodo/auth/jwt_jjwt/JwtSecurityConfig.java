@@ -45,8 +45,12 @@ public class JwtSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/authenticate", "/signup", "/error", "/token/refresh").permitAll() // 해당 경로는 인증 없이 접근
-                                                                                                     // 가능
+                .requestMatchers("/authenticate", "/signup", "/error", "/token/refresh", "/logout").permitAll() // 해당
+                                                                                                                // 경로는
+                                                                                                                // 인증
+                                                                                                                // 없이
+                                                                                                                // 접근
+                // 가능
                 .requestMatchers(HttpMethod.OPTIONS, "/**", "/").permitAll() // CORS 사전 요청 Preflight request)접근 허용
                 .anyRequest()
                 .authenticated()) // 그 외 모든 요청은 인증 필요
@@ -56,7 +60,7 @@ public class JwtSecurityConfig {
                 .httpBasic(Customizer.withDefaults()) // 기본 HTTP 인증 활성화
                 .headers(header -> {
                     header.frameOptions().sameOrigin(); // 클랙지킹 방지를 위해 동일 출처만 허용
-                })
+                }).logout(logout -> logout.disable())// 기본 스프링 securty 로그아웃을 비활성화해주자 그렇지않으면 404에러가 난다
                 .build();
     }
 

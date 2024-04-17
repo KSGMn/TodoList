@@ -19,7 +19,13 @@ const ListTodosComponent = () => {
         console.log(response.data);
         setTodos(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          authContext.logout();
+          navigate("/login");
+        }
+      });
   };
 
   // return을 넣어주지 않으면 코드가 onClick 했을 때 실행되는게 아니라 바로 실행되어버린다

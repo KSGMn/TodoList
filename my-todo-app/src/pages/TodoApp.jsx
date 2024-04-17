@@ -12,6 +12,8 @@ import TodoComponent from "../components/TodoComponent";
 const AuthenticatedRoute = ({ children }) => {
   const authContext = useAuth();
 
+  if (authContext.loading) return <h1>Loading...</h1>;
+
   if (authContext.isAuthenticated) return children;
 
   return <Navigate to="/login" />;
@@ -23,33 +25,35 @@ const TodoApp = () => {
       <AuthProvider>
         <BrowserRouter>
           <HeaderComponent />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <AuthenticatedRoute>
-                  <WelcomeComponent />
-                </AuthenticatedRoute>
-              }
-            />
-            <Route
-              path="/:username/todos"
-              element={
-                <AuthenticatedRoute>
-                  <ListTodosComponent />
-                </AuthenticatedRoute>
-              }
-            />
-            <Route
-              path="/:username/todos/:id"
-              element={
-                <AuthenticatedRoute>
-                  <TodoComponent />
-                </AuthenticatedRoute>
-              }
-            />
-            <Route path="/login" element={<LoginComponent />} />
-          </Routes>
+          <main className="mt-3">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <AuthenticatedRoute>
+                    <WelcomeComponent />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route
+                path="/:username/todos"
+                element={
+                  <AuthenticatedRoute>
+                    <ListTodosComponent />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route
+                path="/:username/todos/:id"
+                element={
+                  <AuthenticatedRoute>
+                    <TodoComponent />
+                  </AuthenticatedRoute>
+                }
+              />
+              <Route path="/login" element={<LoginComponent />} />
+            </Routes>
+          </main>
           <FooterComponent />
         </BrowserRouter>
       </AuthProvider>

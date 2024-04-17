@@ -11,7 +11,7 @@ const HeaderComponent = () => {
     authContext.logout();
   };
   return (
-    <header className="mb-5 p-2">
+    <header className="p-2">
       <div className="container">
         <div className="row">
           <nav className="navbar">

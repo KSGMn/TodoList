@@ -19,7 +19,9 @@ public class MyTodoApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
 						.allowedMethods("*")
-						.allowedOrigins("http://localhost:3000");
+						.allowedOrigins("http://localhost:3000")
+						.allowCredentials(true)// 쿠키를 포함한 요청도 가능하게
+						.allowedHeaders("*");
 			}
 		};
 	}
